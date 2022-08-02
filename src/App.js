@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Home from "./Home";
 import Login from "./Login";
 import Sign from "./Sign";
+import Today from './Today';
 
 
 export default function App(){
@@ -12,7 +13,8 @@ export default function App(){
         <Routes>
             <Route path="/" element={<Login /> }/> 
             <Route path="/cadastro" element={<Sign />}/>
-            <Route path="/habitos" element={<Home />}/>      
+            <Route path="/habitos" element={<Home />}/>
+            <Route path="/hoje" element={<Today />}/>     
         </Routes>
     </BrowserRouter>
     </AppStyled>

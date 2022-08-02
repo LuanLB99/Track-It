@@ -7,7 +7,7 @@ export default function BottomBar(){
     <Footer>
         <div>Habitos</div>
         <Circ>
-        <Button><img src={elipse} alt="elipse"/> <div>Hoje</div></Button>
+        <Button><img src={elipse} alt="elipse"/></Button>
             
         </Circ>    
         <div>Histórico</div>     
@@ -16,27 +16,36 @@ export default function BottomBar(){
 }
 
 const Footer = styled.div`
+    margin: 0 auto;
     width: 100%;
-    height: 50px;
-    background: crimson;
+    height: 60px;
+    background: #FFFFFF;
     position: absolute;
     bottom: 0px;
     display:flex;
     justify-content:space-around;
-    align-itens: center;
+    align-items: center;
     color:white;
+
+    div{
+        display:flex;
+        align-items: center;
+        justify-content:center;
+        margin: 0 auto;
+        color:#52B6FF;
+    }
 
 `
 const Circ = styled.div`
     position: relative;
-    bottom: 50px;
+    bottom: 25px;
+
+    img{
+        height:70px;
+        width:70px;
+    }
 `
 
 const Button = styled.div`
-    position: absolute;
-    display: inline-block;
-
-    div{
-        position: relative;
-    }
+    
 `
