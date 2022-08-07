@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import Logo from './img/Logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { postSign } from './services/Requests';
 
 export default function Sign(){
     const [formSign, setFormSign] = useState({});
+   const navigate = useNavigate();
 
     function mergeform({name, value}) {
         console.log(value,name)
@@ -14,8 +16,11 @@ export default function Sign(){
         })
     }
 
-    function sendFormSign(){
-        console.log(formSign);
+    function sendFormSign(e){
+        e.preventDefault();
+        postSign(formSign).then((res) => navigate('/'))
+        .catch(() => console.log('deu erro ai, menor'))
+
     }
 
     return(

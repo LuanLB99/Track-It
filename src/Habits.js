@@ -1,10 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import plus from './img/+.png';
 import Habit from './Habit';
+import { getHabit } from "./services/Requests";
+import MyHabits from "./MyHabits";
 
 export default function Habits(){
     const [newHabit, setNewHabit] = useState(false);
+    const [listHabit, setListHabit] = useState([]);
+
+    useEffect(()=> {
+        getHabit().then(res => {
+            console.log(res.data)
+            setListHabit(...listHabit,res.data)
+        })
+    },[])
 
     return(
         <>
@@ -15,10 +25,11 @@ export default function Habits(){
         {(newHabit)? 
             <Habit setNewHabit={setNewHabit}/> : ''  
     }
-        <div>
+        
+        {(listHabit.length === 0) ? <NoHabits>
             Você não tem nenhum hábito cadastrado ainda. 
             Adicione um hábito para começar a trackear!
-        </div>
+        </NoHabits>: listHabit.map((myHabit) => <MyHabits myHabit={myHabit}/>)}
 
         </>
     )
@@ -50,5 +61,10 @@ const Plus = styled.div`
     justify-content: center;
     align-items: center;
     cursor:pointer;
+`
+
+const NoHabits = styled.div`
+    width: 90%;
+    margin: 0 auto;
 `
 

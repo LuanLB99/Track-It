@@ -1,21 +1,59 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { postHabit } from "./services/Requests";
+
 
 export default function Habit({setNewHabit}){
+
+    const [days, setDays] = useState([]);
+    const [habit, setHabit] = useState();
+    const [formHabit, setFormHabit] = useState({});
+
+function removeValues(arr,day){
+    return arr.filter((i) => i != day)
+}
+
+function myvalues(i){
+    const convert = parseInt(i);
+    if(!days.includes(convert)){
+        days.push(convert)
+        
+    } else {
+        setDays(removeValues(days, convert));
+    }
+
+    
+}
+
+
+function postingHabit(){
+    const body = {
+        name:habit,
+        days:days,
+    }
+        postHabit(body)
+        .then((res)=> console.log(res.data))
+        .catch((res)=> (console.log(res.data.message)))
+   
+    
+}
+
+
     return(
         <Form>
-            <input placeholder="nome do hábito" type='text' name="habito" />
+            <input placeholder="nome do hábito" type='text' name="habito" onChange={(e) => setHabit(e.target.value)}/>
             <Inputs>
-            <DayInput value="S" type='text' name="segunda" />
-            <DayInput value="T" type='text' name="terça"  />
-            <DayInput value="Q" type='text' name="quarta"  />
-            <DayInput value="Q" type='text' name="quinta"  />
-            <DayInput value="S" type='text' name="sexta"  />
-            <DayInput value="S" type='text' name="sabado"  />
-            <DayInput value="D" type='text' name="domingo"  />
+            <DayInput value="S" type='text' name='1' onClick={(e => myvalues((e.target.name)))} />
+            <DayInput value="T" type='text' name="2" onClick={(e => myvalues(e.target.name))} />
+            <DayInput value="Q" type='text' name="3" onClick={(e => myvalues(e.target.name))} />
+            <DayInput value="Q" type='text' name="4" onClick={(e => myvalues(e.target.name))} />
+            <DayInput value="S" type='text' name="5" onClick={(e => myvalues(e.target.name))}/>
+            <DayInput value="S" type='text' name="6" onClick={(e => myvalues(e.target.name))}/>
+            <DayInput value="D" type='text' name="7" onClick={(e => myvalues(e.target.name))}/>
             </Inputs>
                 <Buttons>
                 <CancelButton onClick={() => setNewHabit(false)}>Cancelar</CancelButton>
-                <SendButton>Salvar</SendButton>
+                <SendButton onClick={postingHabit}>Salvar</SendButton>
                 </Buttons>
         </Form>
     )

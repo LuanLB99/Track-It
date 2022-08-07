@@ -1,11 +1,16 @@
+import { useContext } from "react";
 import styled from "styled-components";
-import foto from './img/arrasca.jpeg'
+import UserContext from "./AppContext/Context";
+import foto from './img/arrasca.jpeg';
+
 
 export default function TopBar(){
+    const image = JSON.parse(localStorage.getItem('image'));
+    const {user,setUser} = useContext(UserContext);
     return(
         <Container>
         <div>TrackIt</div>
-        <img src={foto}/>
+        <img src={image}/>
         </Container>
     )
 }

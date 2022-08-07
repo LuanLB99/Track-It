@@ -1,16 +1,17 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import elipse from './img/Ellipse.png';
+
 
 
 export default function BottomBar(){
     return(
     <Footer>
-        <div>Habitos</div>
+        <Link to={'/habitos'}><div>Habitos</div></Link>
         <Circ>
-        <Button><img src={elipse} alt="elipse"/></Button>
-            
+        <Link to={'/hoje'}><Button><img src={elipse} alt="elipse"/></Button></Link>    
         </Circ>    
-        <div>Histórico</div>     
+        <Link to={'/historico'}><div>Histórico</div></Link>
     </Footer>
     )
 }
@@ -23,7 +24,7 @@ const Footer = styled.div`
     position: absolute;
     bottom: 0px;
     display:flex;
-    justify-content:space-around;
+    justify-content:center;
     align-items: center;
     color:white;
 
@@ -33,6 +34,11 @@ const Footer = styled.div`
         justify-content:center;
         margin: 0 auto;
         color:#52B6FF;
+    }
+
+    a{
+        text-decoration: initial;
+
     }
 
 `
@@ -47,5 +53,5 @@ const Circ = styled.div`
 `
 
 const Button = styled.div`
-    
+    width: 100%;
 `

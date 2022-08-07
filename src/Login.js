@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import Logo from './img/Logo.png';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { postLogin } from './services/Requests';
+import { useNavigate } from 'react-router-dom';
+import UserContext from './AppContext/Context';
 
 
 export default function Login(){
+
+    const navigate = useNavigate();
+    const {user,setUser,} = useContext(UserContext);
 
         const[formLogin, setFormLogin] = useState({});
 
@@ -16,9 +22,19 @@ export default function Login(){
             })
         }
 
-        function sendLogin(){
-            console.log(formLogin);
+        function sendLogin(e){
+            e.preventDefault();
+            postLogin(formLogin).then((res)=> {
+                setUser(res.data);
+                navigate('/hoje', {state: res.data.token})
+                localStorage.setItem('token',JSON.stringify(res.data.token))
+                localStorage.setItem('image', JSON.stringify(res.data.image))
+            })
+            .then((response)=> alert(response.data));
+
         }
+
+        
 
     return(
 
