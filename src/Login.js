@@ -30,7 +30,7 @@ export default function Login(){
                 localStorage.setItem('token',JSON.stringify(res.data.token))
                 localStorage.setItem('image', JSON.stringify(res.data.image))
             })
-            .then((response)=> alert(response.data));
+            .catch((response)=> {alert(response)});
 
         }
 

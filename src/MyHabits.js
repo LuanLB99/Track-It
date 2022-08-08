@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components"
 import lixeira from './img/lixeira.png'
 import { deleteHabit } from "./services/Requests";
 
 export default function MyHabits({myHabit}){
-    console.log(myHabit);
-    const [render, setRender] = useState({})
+    const [render, setRender] = useState({});
+    
 function deleting(){
         if(window.confirm('Você têm certeza?')){
             setRender(myHabit)
@@ -23,37 +23,37 @@ function deleting(){
             <img src={lixeira} onClick={deleting}/>
         </FormHeader>
         <Inputs>
-        <DayInput value="S" type='text' name='1' 
+        <DayInput readOnly value="S" type='text' name='1' 
             background={(myHabit.days.includes(1))?'#CFCFCF':'white'} 
             color={(myHabit.days.includes(1))?"white":"#D4D4D4"}
         />
 
-        <DayInput value="T" type='text' name="2" 
+        <DayInput readOnly  value="T" type='text' name="2" 
         background={(myHabit.days.includes(2))?'#CFCFCF':'white'} 
         color={(myHabit.days.includes(2))?"white":"#D4D4D4"}
         />
 
-        <DayInput value="Q" type='text' name="3" 
+        <DayInput readOnly  value="Q" type='text' name="3" 
         background={(myHabit.days.includes(3))?'#CFCFCF':'white'} 
         color={(myHabit.days.includes(3))?"white":"#D4D4D4"}
         />
 
-        <DayInput value="Q" type='text' name="4" 
+        <DayInput readOnly value="Q" type='text' name="4" 
         background={(myHabit.days.includes(4))?'#CFCFCF':'white'} 
         color={(myHabit.days.includes(4))?"white":"#D4D4D4"}
         />
 
-        <DayInput value="S" type='text' name="5" 
+        <DayInput readOnly value="S" type='text' name="5" 
         background={(myHabit.days.includes(5))?'#CFCFCF':'white'} 
         color={(myHabit.days.includes(5))?"white":"#D4D4D4"}
         />
 
-        <DayInput value="S" type='text' name="6" 
+        <DayInput readOnly value="S" type='text' name="6" 
         background={(myHabit.days.includes(6))?'#CFCFCF':'white'} 
         color={(myHabit.days.includes(6))?"white":"#D4D4D4"}
         />
 
-        <DayInput value="D" type='text' name="7" 
+        <DayInput readOnly value="D" type='text' name="7" 
         background={(myHabit.days.includes(7))?'#CFCFCF':'white'} 
         color={(myHabit.days.includes(6))?"white":"#D4D4D4"}
         />

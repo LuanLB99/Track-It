@@ -7,13 +7,14 @@ export default function Habit({setNewHabit}){
 
     const [days, setDays] = useState([]);
     const [habit, setHabit] = useState();
-    const [formHabit, setFormHabit] = useState({});
+    const [click, setClick] = useState(true);
 
 function removeValues(arr,day){
     return arr.filter((i) => i != day)
 }
 
 function myvalues(i){
+    setClick(!click);
     const convert = parseInt(i);
     if(!days.includes(convert)){
         days.push(convert)
@@ -43,13 +44,20 @@ function postingHabit(){
         <Form>
             <input placeholder="nome do hábito" type='text' name="habito" onChange={(e) => setHabit(e.target.value)}/>
             <Inputs>
-            <DayInput value="S" type='text' name='1' onClick={(e => myvalues((e.target.name)))} />
-            <DayInput value="T" type='text' name="2" onClick={(e => myvalues(e.target.name))} />
-            <DayInput value="Q" type='text' name="3" onClick={(e => myvalues(e.target.name))} />
-            <DayInput value="Q" type='text' name="4" onClick={(e => myvalues(e.target.name))} />
-            <DayInput value="S" type='text' name="5" onClick={(e => myvalues(e.target.name))}/>
-            <DayInput value="S" type='text' name="6" onClick={(e => myvalues(e.target.name))}/>
-            <DayInput value="D" type='text' name="7" onClick={(e => myvalues(e.target.name))}/>
+            {(click) ?<> <DayInput value="S" type='text' name='1' onClick={(e => myvalues((e.target.name)))} readOnly color={(days.includes(1))?"white":"#D4D4D4"} background={(days.includes(1))?"#D4D4D4":"white"}/>
+            <DayInput value="T" type='text' name="2" onClick={(e => myvalues(e.target.name))} readOnly color={(days.includes(2))?"white":"#D4D4D4"} background={(days.includes(2))?"#D4D4D4":"white"}/>
+            <DayInput value="Q" type='text' name="3" onClick={(e => myvalues(e.target.name))} readOnly color={(days.includes(3))?"white":"#D4D4D4"} background={(days.includes(3))?"#D4D4D4":"white"}/>
+            <DayInput value="Q" type='text' name="4" onClick={(e => myvalues(e.target.name))} readOnly color={(days.includes(4))?"white":"#D4D4D4"} background={(days.includes(4))?"#D4D4D4":"white"}/>
+            <DayInput value="S" type='text' name="5" onClick={(e => myvalues(e.target.name))}readOnly color={(days.includes(5))?"white":"#D4D4D4"} background={(days.includes(5))?"#D4D4D4":"white"}/>
+            <DayInput value="S" type='text' name="6" onClick={(e => myvalues(e.target.name))}readOnly color={(days.includes(6))?"white":"#D4D4D4"} background={(days.includes(6))?"#D4D4D4":"white"}/>
+            <DayInput value="D" type='text' name="7" onClick={(e => myvalues(e.target.name))}readOnly color={(days.includes(7))?"white":"#D4D4D4"} background={(days.includes(7))?"#D4D4D4":"white"}/> </>: <><DayInput value="S" type='text' name='1' onClick={(e => myvalues((e.target.name)))} readOnly color={(days.includes(1))?"white":"#D4D4D4"} background={(days.includes(1))?"#D4D4D4":"white"}/>
+            <DayInput value="T" type='text' name="2" onClick={(e => myvalues(e.target.name))} readOnly color={(days.includes(2))?"white":"#D4D4D4"} background={(days.includes(2))?"#D4D4D4":"white"}/>
+            <DayInput value="Q" type='text' name="3" onClick={(e => myvalues(e.target.name))} readOnly color={(days.includes(3))?"white":"#D4D4D4"} background={(days.includes(3))?"#D4D4D4":"white"}/>
+            <DayInput value="Q" type='text' name="4" onClick={(e => myvalues(e.target.name))} readOnly color={(days.includes(4))?"white":"#D4D4D4"} background={(days.includes(4))?"#D4D4D4":"white"}/>
+            <DayInput value="S" type='text' name="5" onClick={(e => myvalues(e.target.name))}readOnly color={(days.includes(5))?"white":"#D4D4D4"} background={(days.includes(5))?"#D4D4D4":"white"}/>
+            <DayInput value="S" type='text' name="6" onClick={(e => myvalues(e.target.name))}readOnly color={(days.includes(6))?"white":"#D4D4D4"} background={(days.includes(6))?"#D4D4D4":"white"}/>
+            <DayInput value="D" type='text' name="7" onClick={(e => myvalues(e.target.name))}readOnly color={(days.includes(7))?"white":"#D4D4D4"} background={(days.includes(7))?"#D4D4D4":"white"}/></>}
+            
             </Inputs>
                 <Buttons>
                 <CancelButton onClick={() => setNewHabit(false)}>Cancelar</CancelButton>
@@ -75,8 +83,8 @@ const DayInput = styled.input`
     border: 1px solid #D4D4D4;
     border-radius: 2px;
     text-align: center;
-    color:#D4D4D4;
-
+    color:${(props)=> props.color};
+    background:${(props)=> props.background};
     
 `
 

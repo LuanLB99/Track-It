@@ -3,6 +3,7 @@ import Logo from './img/Logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { postSign } from './services/Requests';
+import { Audio } from "react-loader-spinner";
 
 export default function Sign(){
     const [formSign, setFormSign] = useState({});
@@ -19,7 +20,7 @@ export default function Sign(){
     function sendFormSign(e){
         e.preventDefault();
         postSign(formSign).then((res) => navigate('/'))
-        .catch(() => console.log('deu erro ai, menor'))
+        .catch((res) => console.log(res.data.message))
 
     }
 
@@ -45,6 +46,14 @@ export default function Sign(){
                     name: e.target.name,
                     value:e.target.value
                 })}/>
+                <Audio
+                height = "80"
+                width = "80"
+                radius = "9"
+                color = 'green'
+                ariaLabel = 'three-dots-loading'     
+                wrapperStyle
+                wrapperClass/> 
                 <button onClick={sendFormSign}>Cadastrar</button>
             </Forms>
             <Link to={'/'}><Asign>Já tem uma conta? Faça login!</Asign></Link>

@@ -5,17 +5,28 @@ import { checkHabit, uncheckHabit } from "./services/Requests";
 
 
 
-export default function MyHabitToday({habit}){
-    const[isDone, setIsDone] = useState(false);
+export default function MyHabitToday({habit, concludes, setConcludes}){
+    const[isDone, setIsDone] = useState(habit.done);
+
+    function removeValues(arr,day){
+        return arr.filter((i) => i != day)
+    }
+    
+
 
     function isDoneHabit(){
         if(habit.done){
-          console.log('habilitado')
+          uncheckHabit(habit.id)
+          .then()
+          .catch((res) => console.log(res.data))
+          setIsDone(!isDone);
+          setConcludes(removeValues(concludes,habit.id))
         } else{
-            console.log(habit.id)
             checkHabit(habit.id)
-            .then(() => console.log('deu certo!'))
-            .catch(() => console.log('deu errado'))
+            .then()
+            .catch()
+            setIsDone(!isDone)
+            concludes.push(habit.id)
         }
     }
 
@@ -23,12 +34,17 @@ export default function MyHabitToday({habit}){
         <MyHabit>
             <SingleHabit>
                 <div>{habit.name}</div>  
-                <h3>Sequência atual:{habit.currentSequence} dias</h3>
-                <h3>Seu recorde:{habit.highestSequence} dias</h3>      
+
+                {(habit.currentSequence === habit.highestSequence) ? <><Sequencia>Sequência atual:{habit.currentSequence} dias</Sequencia>
+                <Sequencia>Seu recorde:{habit.highestSequence} dias</Sequencia> </>: <><SequenciaIn>Sequência atual:{habit.currentSequence} dias</SequenciaIn>
+                <SequenciaIn>Seu recorde:{habit.highestSequence} dias</SequenciaIn></> }
+                    
             </SingleHabit>
-            <Correct color={(habit.done)? 'green':'gray'} onClick={isDoneHabit}>
+            {(isDone)? <Correct color='green' onClick={isDoneHabit}>
                 <img src={certo}></img>
-            </Correct>
+            </Correct> :  <Correct color='gray' onClick={isDoneHabit}>
+                <img src={certo}></img>
+            </Correct> }
         </MyHabit>
       
     )
@@ -38,7 +54,7 @@ const MyHabit = styled.div`
     box-sizing: border-box;
     width: 90%;
     height: 90px;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 15px;
     background: lightgreen;
     display: flex;
@@ -54,12 +70,7 @@ const SingleHabit = styled.div`
         font-size: 15px;
     }
 
-    h3{
-        height:10px;
-        width:100%;
-        font-size: 10px;
-
-    }
+    
 `
 
 const Correct = styled.div`
@@ -70,5 +81,23 @@ const Correct = styled.div`
     border-radius:5px;
     height: 90%;
     width: 70px;
+
+`
+
+const Sequencia = styled.h3`
+
+    height:10px;
+    width:100%;
+    font-size: 10px;
+    color: green;
+
+`
+
+const SequenciaIn = styled.h3`
+
+    height:10px;
+    width:100%;
+    font-size: 10px;
+    color: black;
 
 `

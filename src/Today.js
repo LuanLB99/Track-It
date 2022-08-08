@@ -1,17 +1,21 @@
 import BottomBar from "./BottomBar";
 import TopBar from "./TopBar";
 import styled from "styled-components";
-import UserContext from "./AppContext/Context";
+
 import { useContext, useEffect, useState } from "react";
 import { getHabitToday } from "./services/Requests";
 import MyHabitToday from "./MyHabitToday";
 import dayjs from "dayjs";
+import ProgressContext from "./AppContext/ProgressContext";
+
 
 
 export default function Today(){
     const[habitToday, setHabitToday] = useState([]);
-    
-   
+    const semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    const {concludes, setConcludes} = useContext(ProgressContext);
+    console.log(concludes);
+   console.log(habitToday.length)
     useEffect(()=> {
         getHabitToday()
         .then((res)=> 
@@ -25,12 +29,13 @@ export default function Today(){
     <>
         <TopBar/>
         <Top>
-            <div>Terça, 02/08</div>
-            <h3>Nenhum Hábito Concluido ainda.</h3>
+            <div>{semana[dayjs().day()]}, {dayjs().format('DD/MM')}</div>
+            {(habitToday.length === 0)?  <Sub>Nenhum Hábito Concluido ainda.</Sub> : <SubC>67% dos hábitos concluídos</SubC> }
+            
         </Top>
 
         {(habitToday.length === 0)? <Load>'loading...'</Load> : habitToday.map((habit) =>
-        <MyHabitToday habit={habit}/>
+        <MyHabitToday habit={habit} concludes={concludes} setConcludes={setConcludes}/>
         )}
         <BottomBar/>
     </>
@@ -43,16 +48,30 @@ const Top = styled.div`
     margin-top: 60px;
     margin-bottom:10px;
     display:flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 
     div{
         margin-top: 20px;
         font-size: 20px;
         color: #126BA5;
     }
+
+
 `
 
 const Load = styled.div`
     margin: 0 auto; 
+`
+const Sub = styled.h3`
+    color:gray;
+    font-size:14px;
+    height:20px;
+`
+
+const SubC = styled.h3`
+color:green;
+font-size:14px;
+height:20px; 
 `
