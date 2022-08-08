@@ -3,10 +3,11 @@ import Logo from './img/Logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { postSign } from './services/Requests';
-import { Audio } from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Sign(){
     const [formSign, setFormSign] = useState({});
+    const [sending, setSending] = useState(false);
    const navigate = useNavigate();
 
     function mergeform({name, value}) {
@@ -20,7 +21,7 @@ export default function Sign(){
     function sendFormSign(e){
         e.preventDefault();
         postSign(formSign).then((res) => navigate('/'))
-        .catch((res) => console.log(res.data.message))
+        .catch((res) => alert(res.data))
 
     }
 
@@ -46,15 +47,7 @@ export default function Sign(){
                     name: e.target.name,
                     value:e.target.value
                 })}/>
-                <Audio
-                height = "80"
-                width = "80"
-                radius = "9"
-                color = 'green'
-                ariaLabel = 'three-dots-loading'     
-                wrapperStyle
-                wrapperClass/> 
-                <button onClick={sendFormSign}>Cadastrar</button>
+                {(sending)? <button onClick={sendFormSign}>Cadastrar</button> : <Dots><ThreeDots color="white" height={40} width={40}/></Dots>}
             </Forms>
             <Link to={'/'}><Asign>Já tem uma conta? Faça login!</Asign></Link>
         </Container>
@@ -69,7 +62,7 @@ const Section = styled.div`
     display: flex;
     justify-content: center;
     align-itens: center;
-    background: lightblue;
+    background: white;
 `
 
 const Container = styled.div`
@@ -98,6 +91,7 @@ const Forms = styled.form`
         width: 80%;
         height: 25px;
         margin: 2px auto;
+        border: 1px solid;
     }
 
     button {
@@ -119,4 +113,18 @@ const Asign = styled.div`
     display:flex;
     justify-content:center;
     text align:center;
+`
+
+const Dots = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        width:80%;
+        height:25px;
+        background:#52B6FF;
+        border-radius:4px;
+        border: 1px solid #52B6FF;
+        color: white;
+        margin: 5px auto;
+        cursor:pointer;
 `

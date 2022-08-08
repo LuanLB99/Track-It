@@ -22,15 +22,16 @@ export default function Habits(){
             <div>Meus Hábitos</div>
             <Plus onClick={() => setNewHabit(!newHabit)}><img src={plus} alt="setinha"/></Plus>
         </Top>
+        
         {(newHabit)? 
             <Habit setNewHabit={setNewHabit}/> : ''  
     }
-        
+        <Content/>
         {(listHabit.length === 0) ? <NoHabits>
             Você não tem nenhum hábito cadastrado ainda. 
             Adicione um hábito para começar a trackear!
         </NoHabits>: listHabit.map((myHabit) => <MyHabits myHabit={myHabit}/>)}
-
+            <Content/>
         </>
     )
 }
@@ -66,5 +67,9 @@ const Plus = styled.div`
 const NoHabits = styled.div`
     width: 90%;
     margin: 0 auto;
+`
+
+const Content = styled.div`
+    overflow: scroll;
 `
 

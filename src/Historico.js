@@ -7,9 +7,9 @@ export default function Historico(){
         <>
          <TopBar/>
         <Top>
-            <div>Histárico</div>
+            <div>Histórico</div>
         </Top>
-        <h4>Em breve você poderá ver o histórico dos seus hábitos aqui!</h4>
+        <Hist>Em breve você poderá ver o histórico dos seus hábitos aqui!</Hist>
         <BottomBar/>
         </>
     )
@@ -29,4 +29,10 @@ const Top = styled.div`
         font-size: 20px;
         color: #126BA5;
     }
+`
+
+const Hist = styled.h4`
+       color:#666666;
+       margin: 0 auto;
+       width: 90%;
 `

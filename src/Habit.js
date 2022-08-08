@@ -42,7 +42,7 @@ function postingHabit(){
 
     return(
         <Form>
-            <input placeholder="nome do hábito" type='text' name="habito" onChange={(e) => setHabit(e.target.value)}/>
+            <TextInput placeholder="nome do hábito" type='text' name="habito" onChange={(e) => setHabit(e.target.value)}/>
             <Inputs>
             {(click) ?<> <DayInput value="S" type='text' name='1' onClick={(e => myvalues((e.target.name)))} readOnly color={(days.includes(1))?"white":"#D4D4D4"} background={(days.includes(1))?"#D4D4D4":"white"}/>
             <DayInput value="T" type='text' name="2" onClick={(e => myvalues(e.target.name))} readOnly color={(days.includes(2))?"white":"#D4D4D4"} background={(days.includes(2))?"#D4D4D4":"white"}/>
@@ -69,12 +69,21 @@ function postingHabit(){
 
 const Form = styled.div`
     margin: 0 auto;
-    background: lightgreen;
+    background: white;
     width:90%;
     height:120px;
     border-radius:5px;
     display:flex;
     flex-direction: column;
+    
+`
+const TextInput = styled.input`
+    margin: 0 auto;
+    margin-top:10px;
+    width:90%;
+    height:30px;
+    border: 1px solid #D4D4D4;
+
 `
 
 const DayInput = styled.input`
@@ -89,6 +98,7 @@ const DayInput = styled.input`
 `
 
 const Inputs = styled.div`
+    margin: 0 auto;
     margin-top: 10px;
 
     input {
@@ -97,17 +107,17 @@ const Inputs = styled.div`
 `
 
 const SendButton = styled.div`
-    height:35px;
+    height:30px;
     width: 80px;
     background:#52B6FF;
     color: white;
     display:flex;
     justify-content: center;
     align-items: center;
-    boder-radius:4px;
+    border-radius:4px;
 `
 const CancelButton = styled.div`
-    height:35px;
+    height:30px;
     width: 80px;
     color:#52B6FF;
     background: white;
@@ -117,6 +127,7 @@ const CancelButton = styled.div`
 `
 
 const Buttons = styled.div`
+    margin-top: 10px;
     height: 60px;
     width:95%;
     display:flex;

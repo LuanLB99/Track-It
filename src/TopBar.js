@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "./AppContext/Context";
-import foto from './img/arrasca.jpeg';
+
 
 
 export default function TopBar(){

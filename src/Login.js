@@ -5,12 +5,14 @@ import { useContext, useState } from 'react';
 import { postLogin } from './services/Requests';
 import { useNavigate } from 'react-router-dom';
 import UserContext from './AppContext/Context';
+import { ThreeDots } from 'react-loader-spinner';
 
 
 export default function Login(){
 
     const navigate = useNavigate();
     const {user,setUser,} = useContext(UserContext);
+    const [sending, setSending] = useState(false);
 
         const[formLogin, setFormLogin] = useState({});
 
@@ -25,12 +27,15 @@ export default function Login(){
         function sendLogin(e){
             e.preventDefault();
             postLogin(formLogin).then((res)=> {
+                setSending(true)
                 setUser(res.data);
                 navigate('/hoje', {state: res.data.token})
                 localStorage.setItem('token',JSON.stringify(res.data.token))
                 localStorage.setItem('image', JSON.stringify(res.data.image))
             })
-            .catch((response)=> {alert(response)});
+            .catch((response)=> {alert(response)
+            setSending(false)
+            });
 
         }
 
@@ -53,7 +58,7 @@ export default function Login(){
                     name:e.target.name,
                     value:e.target.value,
                 })}/>
-                <button onClick={sendLogin}>Entrar</button>
+                {(!sending) ? <button onClick={sendLogin}>Entrar</button> : <Dots><ThreeDots color="white" height={40} width={40}/></Dots>}
             </Forms>
             <Link to={'/cadastro'}><Sign>Não tem uma conta? Cadastre-se!</Sign></Link>
         </Container>
@@ -68,7 +73,7 @@ const Section = styled.div`
     display: flex;
     justify-content: center;
     align-itens: center;
-    background: lightblue;
+    background: white;
 `
 
 const Container = styled.div`
@@ -81,7 +86,7 @@ const Container = styled.div`
     img{
         width:125px;
         height:125px;
-        margin: 0 auto;
+        margin: 10px auto;
     }
 `
 
@@ -95,7 +100,8 @@ const Forms = styled.form`
 
     input {
         width: 80%;
-        height: 25px;
+        border: 1px solid
+        height: 30px;
         margin: 2px auto;
     }
 
@@ -106,7 +112,7 @@ const Forms = styled.form`
         border-radius:4px;
         border: 1px solid #52B6FF;
         color: white;
-        margin: 2px auto;
+        margin: 5px auto;
         cursor:pointer;
     }
 `
@@ -118,4 +124,18 @@ const Sign = styled.div`
     display:flex;
     justify-content:center;
     text align:center;
+`
+
+const Dots = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        width:80%;
+        height:25px;
+        background:#52B6FF;
+        border-radius:4px;
+        border: 1px solid #52B6FF;
+        color: white;
+        margin: 5px auto;
+        cursor:pointer;
 `

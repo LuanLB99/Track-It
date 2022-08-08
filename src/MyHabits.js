@@ -73,12 +73,13 @@ const Inputs = styled.div`
 `
 const Form = styled.div`
     margin: 10px auto;
-    background: lightgreen;
+    background: white;
     width:90%;  
     height:120px;
     border-radius:5px;
     display:flex;
     flex-direction: column;
+
 
     
 `

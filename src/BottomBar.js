@@ -1,15 +1,31 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import elipse from './img/Ellipse.png';
-
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import "react-circular-progressbar/dist/styles.css"
 
 
 export default function BottomBar(){
+
+
     return(
     <Footer>
         <Link to={'/habitos'}><div>Habitos</div></Link>
         <Circ>
-        <Link to={'/hoje'}><Button><img src={elipse} alt="elipse"/></Button></Link>    
+        <Link to={'/hoje'}><Button><CircularProgressbar
+                    value="67"
+                    text="Hoje"
+                    maxValue={1}
+                    background
+                    backgroundPadding={6}
+                    styles={buildStyles({
+                        backgroundColor: "#3e98c7",
+                        textColor: "#fff",
+                        pathColor: "#fff",
+                        trailColor: "transparent",
+                        height:"40px",
+                        width: '40px'
+                    })}
+                /></Button></Link>    
         </Circ>    
         <Link to={'/historico'}><div>Histórico</div></Link>
     </Footer>
@@ -18,8 +34,8 @@ export default function BottomBar(){
 
 const Footer = styled.div`
     margin: 0 auto;
-    width: 100%;
-    height: 60px;
+    width: 90%;
+    height: 50px;
     background: #FFFFFF;
     position: absolute;
     bottom: 0px;
@@ -47,11 +63,12 @@ const Circ = styled.div`
     bottom: 25px;
 
     img{
-        height:70px;
-        width:70px;
+        height:40px;
+        width:40px;
     }
 `
 
 const Button = styled.div`
-    width: 100%;
+    width: 100px;
+    height: 40px;
 `

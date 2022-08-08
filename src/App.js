@@ -4,7 +4,6 @@ import styled from "styled-components";
 import UserContext from "./AppContext/Context";
 import Home from "./Home";
 import Login from "./Login";
-import PrivatePage from "./PrivatePage";
 import Sign from "./Sign";
 import Today from './Today';
 import Historico from "./Historico";
@@ -14,6 +13,7 @@ import Historico from "./Historico";
 export default function App(){
 
     const [user, setUser] = useState({});
+    const {progress, setProgress} = useState([]);
 
     return(
     <AppStyled>
@@ -36,6 +36,7 @@ const AppStyled = styled.main`
     box-sizing:border-box;
     margin: 0;
     padding: 0;
-    background:lightblue;
+    background:#E5E5E5;
     height:600px;
+    overflow-y: scroll;
 `

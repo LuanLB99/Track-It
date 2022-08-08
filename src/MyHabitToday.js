@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components"
+import ProgressContext from "./AppContext/ProgressContext";
 import certo from "./img/certo.png";
-import { checkHabit, uncheckHabit } from "./services/Requests";
+import { checkHabit, uncheckHabit, getHabitToday } from "./services/Requests";
 
 
 
-export default function MyHabitToday({habit, concludes, setConcludes}){
+
+export default function MyHabitToday({habit}){
     const[isDone, setIsDone] = useState(habit.done);
 
-    function removeValues(arr,day){
-        return arr.filter((i) => i != day)
-    }
-    
 
+    
 
     function isDoneHabit(){
         if(habit.done){
@@ -20,15 +19,18 @@ export default function MyHabitToday({habit, concludes, setConcludes}){
           .then()
           .catch((res) => console.log(res.data))
           setIsDone(!isDone);
-          setConcludes(removeValues(concludes,habit.id))
+          ;
+        
         } else{
             checkHabit(habit.id)
             .then()
             .catch()
             setIsDone(!isDone)
-            concludes.push(habit.id)
+            ;
+        
         }
     }
+
 
     return(
         <MyHabit>
@@ -40,7 +42,7 @@ export default function MyHabitToday({habit, concludes, setConcludes}){
                 <SequenciaIn>Seu recorde:{habit.highestSequence} dias</SequenciaIn></> }
                     
             </SingleHabit>
-            {(isDone)? <Correct color='green' onClick={isDoneHabit}>
+            {(isDone)? <Correct color='#8FC549' onClick={isDoneHabit}>
                 <img src={certo}></img>
             </Correct> :  <Correct color='gray' onClick={isDoneHabit}>
                 <img src={certo}></img>
@@ -56,7 +58,7 @@ const MyHabit = styled.div`
     height: 90px;
     margin: 10px auto;
     padding: 15px;
-    background: lightgreen;
+    background: white;
     display: flex;
     justify-content:space-between;
     align-items:center;
@@ -89,7 +91,7 @@ const Sequencia = styled.h3`
     height:10px;
     width:100%;
     font-size: 10px;
-    color: green;
+    color: #8FC549;
 
 `
 
