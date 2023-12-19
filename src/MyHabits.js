@@ -10,7 +10,7 @@ function deleting(){
         if(window.confirm('Você têm certeza?')){
             setRender(myHabit)
         deleteHabit(myHabit.id)
-        .then((res) => console.log(res.data))
+        .then((res) => alert("Hábito excluído com sucesso!"))
         .catch((res) => console.log(res.data.message))
         };
 }

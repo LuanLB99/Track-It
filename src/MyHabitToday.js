@@ -61,6 +61,10 @@ const MyHabit = styled.div`
     background: white;
     display: flex;
     justify-content:space-between;
+    font-family: 'Lexend Deca', sans-serif;
+    Weight:500;
+    Size:19.98px;
+    color: #666666;
     align-items:center;
 `
 

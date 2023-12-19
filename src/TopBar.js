@@ -1,12 +1,11 @@
-import { useContext } from "react";
+
 import styled from "styled-components";
-import UserContext from "./AppContext/Context";
+
 
 
 
 export default function TopBar(){
     const image = JSON.parse(localStorage.getItem('image'));
-    const {user,setUser} = useContext(UserContext);
     return(
         <Container>
         <div>TrackIt</div>
@@ -16,7 +15,7 @@ export default function TopBar(){
 }
 
 const Container = styled.div`
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: space-between;
     top: 0;

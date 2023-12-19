@@ -12,7 +12,7 @@ export default function BottomBar(){
         <Link to={'/habitos'}><div>Habitos</div></Link>
         <Circ>
         <Link to={'/hoje'}><Button><CircularProgressbar
-                    value="67"
+                    value="50"
                     text="Hoje"
                     maxValue={1}
                     background
@@ -34,21 +34,22 @@ export default function BottomBar(){
 
 const Footer = styled.div`
     margin: 0 auto;
-    width: 90%;
-    height: 50px;
+    width: 100%;
+    height: 20px;
     background: #FFFFFF;
-    position: absolute;
-    bottom: 0px;
+    position: fixed;
+    bottom: 20px;
     display:flex;
     justify-content:center;
     align-items: center;
     color:white;
 
     div{
+        height:50px;
         display:flex;
         align-items: center;
         justify-content:center;
-        margin: 0 auto;
+        margin: 0 15px;
         color:#52B6FF;
     }
 

@@ -32,10 +32,11 @@ export default function Today(){
             {(habitToday.length === 0)?  <Sub>Nenhum Hábito Concluido ainda.</Sub> : <SubC>100% dos hábitos concluídos</SubC> }
             
         </Top>
-
-        {(habitToday.length === 0)? <Load>'loading...'</Load> : habitToday.map((habit) =>
-        <MyHabitToday habit={habit} />
-        )}
+        <Middle>
+        <HabitsOfDay>
+        {(habitToday.length === 0)? <Load>'loading...'</Load> : habitToday.map((habit) =><MyHabitToday habit={habit} />)}
+        </HabitsOfDay>
+        </Middle>
         <BottomBar/>
     </>
     )
@@ -43,9 +44,8 @@ export default function Today(){
 
 const Top = styled.div`
     width: 90%;
-    margin: 0 auto;
-    margin-top: 60px;
-    margin-bottom:10px;
+    margin-top: 50px;
+    margin-left: 20px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -59,6 +59,14 @@ const Top = styled.div`
 
 
 `
+const Middle = styled.div`
+    max-height: 450px;
+`
+const HabitsOfDay = styled.div`
+    height: 450px;
+    overflow-y:scroll;
+
+`
 
 const Load = styled.div`
     margin: 0 auto; 
@@ -66,11 +74,10 @@ const Load = styled.div`
 const Sub = styled.h3`
     color:gray;
     font-size:14px;
-    height:20px;
+    height:10px;
 `
-
 const SubC = styled.h3`
-color:#8FC549;
-font-size:14px;
-height:20px; 
+    color:#8FC549;
+    font-size:14px;
+    height:10px; 
 `

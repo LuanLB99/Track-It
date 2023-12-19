@@ -7,11 +7,10 @@ import { ThreeDots } from "react-loader-spinner";
 
 export default function Sign(){
     const [formSign, setFormSign] = useState({});
-    const [sending, setSending] = useState(false);
+    const [sending, setSending] = useState(true);
    const navigate = useNavigate();
 
     function mergeform({name, value}) {
-        console.log(value,name)
         setFormSign({
             ...formSign, 
             [name]: value,
@@ -49,7 +48,7 @@ export default function Sign(){
                 })}/>
                 {(sending)? <button onClick={sendFormSign}>Cadastrar</button> : <Dots><ThreeDots color="white" height={40} width={40}/></Dots>}
             </Forms>
-            <Link to={'/'}><Asign>Já tem uma conta? Faça login!</Asign></Link>
+            <Link to={'/'}><SwitchToLogin>Já tem uma conta? Faça login!</SwitchToLogin></Link>
         </Container>
     </Section>
     </>
@@ -59,6 +58,7 @@ export default function Sign(){
 const Section = styled.div`
     margin: 0 auto;
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-itens: center;
@@ -67,15 +67,17 @@ const Section = styled.div`
 
 const Container = styled.div`
     display: flex;
+    height: 80%;
+    width: 100%;
     flex-direction:column;
     justify-content: center;
     align-itens: center;
     margin: 40px auto;
 
     img{
-        width:125px;
-        height:125px;
-        margin: 0 auto;
+        width:150px;
+        height:150px;
+        margin: 5px auto;
     }
 `
 
@@ -84,35 +86,41 @@ const Forms = styled.form`
     flex-direction:column;
     justify-content:center;
     align-itens: center;
-    margin-bottom: 10px;
-    margin-top: 20px;
+    margin-bottom: 5px;
+    height:50%;
 
     input {
-        width: 80%;
-        height: 25px;
+        border: 1px solid #D4D4D4;
+        height: 40px;
+        width: 250px;
         margin: 2px auto;
-        border: 1px solid;
+        border-radius: 5px;
     }
 
     button {
-        width:80%;
-        height:25px;
+        width:255px;
+        height:45px;
         background:#52B6FF;
         border-radius:4px;
         border: 1px solid #52B6FF;
         color: white;
-        margin: 2px auto;
-        cursor: pointer;
+        cursor:pointer;
+        font-size: 15px;
+        font-weight: 400;
+        font-style: Lexend Deca;
+        margin: 5px auto;
     }
 `
 
-const Asign = styled.div`
-    width:80%;
-    margin: 0 auto;
-    font-size: 10px;
-    display:flex;
-    justify-content:center;
-    text align:center;
+const SwitchToLogin = styled.div`
+        width:80%;
+        height: 20px;
+        margin: 0 auto;
+        font-size: 15px;
+        color: #52B6FF;
+        display:flex;
+        justify-content:center;
+        text align:center;
 `
 
 const Dots = styled.div`

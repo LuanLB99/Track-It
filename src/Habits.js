@@ -10,10 +10,7 @@ export default function Habits(){
     const [listHabit, setListHabit] = useState([]);
 
     useEffect(()=> {
-        getHabit().then(res => {
-            console.log(res.data)
-            setListHabit(...listHabit,res.data)
-        })
+        getHabit().then(res => setListHabit(...listHabit,res.data))
     },[])
 
     return(
@@ -23,15 +20,18 @@ export default function Habits(){
             <Plus onClick={() => setNewHabit(!newHabit)}><img src={plus} alt="setinha"/></Plus>
         </Top>
         
-        {(newHabit)? 
-            <Habit setNewHabit={setNewHabit}/> : ''  
-    }
-        <Content/>
+        {(newHabit)? <Habit setNewHabit={setNewHabit}/> : '' }
+        
+        <Content> 
         {(listHabit.length === 0) ? <NoHabits>
-            Você não tem nenhum hábito cadastrado ainda. 
-            Adicione um hábito para começar a trackear!
-        </NoHabits>: listHabit.map((myHabit) => <MyHabits myHabit={myHabit}/>)}
-            <Content/>
+                                        Você não tem nenhum hábito cadastrado ainda. 
+                                        Adicione um hábito para começar a trackear!
+                                    </NoHabits>
+        
+        : listHabit.map((myHabit) => <MyHabits myHabit={myHabit}/>)}
+        
+        </Content>
+       
         </>
     )
 }
@@ -40,7 +40,7 @@ const Top = styled.div`
     width: 90%;
     margin: 0 auto;
     margin-top: 60px;
-    margin-bottom:10px;
+    margin-bottom:5px;
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -70,6 +70,11 @@ const NoHabits = styled.div`
 `
 
 const Content = styled.div`
-    overflow: scroll;
+    height: 450px;
+    overflow-y:scroll;
 `
+const Middle = styled.div`
+    max-height: 450px;
+`
+
 

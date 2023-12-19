@@ -37,6 +37,6 @@ const AppStyled = styled.main`
     margin: 0;
     padding: 0;
     background:#E5E5E5;
-    height:600px;
-    overflow-y: scroll;
+    height: 600px;
+    overflow: hidden;
 `
